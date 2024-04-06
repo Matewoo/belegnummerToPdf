@@ -48,34 +48,38 @@ def resetNumbers():
 
 print(getYear())
 
+
+def generateBacode(barcodeData):
+    barcode = Code128(barcodeData)
+    barcode.default_writer_options['write_text'] = False
+    barcode.save("C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode")
+
+
 packet = BytesIO()
 can = canvas.Canvas(packet)
 data = "RE20240000"
 
-barcode = Code128(data)
-barcode.default_writer_options['write_text'] = False
-barcode.save("C:\\Users\\mkoer\\Downloads\\barcode")
+generateBacode(data)
 
-svg = svgutils.transform.fromfile("C:\\Users\\mkoer\\Downloads\\barcode.svg")
-originalSVG = svgutils.compose.SVG('C:\\Users\\mkoer\\Downloads\\barcode.svg')
+svg = svgutils.transform.fromfile("C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg")
+originalSVG = svgutils.compose.SVG('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg')
 figure = svgutils.compose.Figure(0, 0, originalSVG)
-figure.save('C:\\Users\\mkoer\\Downloads\\barcode.svg')
+figure.save('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg')
 
-bar = svg2rlg("C:\\Users\\mkoer\\Downloads\\barcode.svg")
+bar = svg2rlg("C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg")
 bar.scale(1.4, 0.2)
 
-i=10
 can.setFillAlpha(0.5)
 can.setFillColorRGB(100, 100, 100)
-can.rect(20, 32-i, 100, 28, fill=1, stroke=1)
+can.rect(20, 22, 100, 28, fill=1, stroke=1)
 
-renderPDF.draw(bar, can, 15.35, 44-i)
+renderPDF.draw(bar, can, 15.35, 34)
 
 can.setFillAlpha(1)
 can.setFillColorRGB(0, 0, 0)
 pdfmetrics.registerFont(TTFont('Consolas', 'Consola.ttf'))
 can.setFont("Consolas", 16.6)
-can.drawString(24, 46-i, data)
+can.drawString(24, 36, data)
 
 can.save()
 packet.seek(0)
