@@ -55,6 +55,22 @@ def generateBacode(barcodeData):
     barcode.save("C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode")
 
 
+def generateBelegnummer(numerType):
+    with open(f'C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\belegnummer_{str(numerType)}.txt','r') as file:
+        fileNumber = " ".join(line.rstrip() for line in file)
+    file.close()
+    fileNumber = int(fileNumber)
+    fileNumber += 1
+    with open(f'C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\belegnummer_{str(numerType)}.txt','w') as file:
+        file.write(str(fileNumber))
+    file.close()
+
+    cutYear = str(currenYear)[2:4]
+
+    return f"RE{cutYear}{str(fileNumber).zfill(4)}"
+
+print(generateBelegnummer(1))
+
 packet = BytesIO()
 can = canvas.Canvas(packet)
 data = "RE20240000"
