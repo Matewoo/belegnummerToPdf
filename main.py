@@ -67,7 +67,7 @@ def generateBelegnummer(numerType):
 
     cutYear = str(currenYear)[2:4]
 
-    return f"RE{cutYear}{str(fileNumber).zfill(4)}"
+    return f"RE{cutYear}1{str(fileNumber).zfill(3)}"
 
 print(generateBelegnummer(1))
 
