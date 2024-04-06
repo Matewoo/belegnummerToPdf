@@ -10,7 +10,7 @@ Not ready
 
 ## ⚠️ WIP
 This Project is currently work in progress and doesn't work. It will be updated every now and then. <br>
-You can find more information [here]([https://github.com/orgs/css-tweaks/projects/3](https://github.com/users/Matewoo/projects/7)).
+You can find more information [here](https://github.com/users/Matewoo/projects/7).
 
 ## 🐞 Beta
 Currently no beta available.
