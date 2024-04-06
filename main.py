@@ -7,10 +7,46 @@ from barcode import Code128
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
 import svgutils
+import datetime
 
 
-input_pdf_path = "C:\\path\\to\\input\\file.pdf" #Path to input file
-output_pdf_path = "C:\\path\\to\\output\\file.pdf" #Path to output file
+currenYear = datetime.datetime.now().year
+input_pdf_path = "C:\\Users\\mkoer\\Downloads\\RE-DE443MGOAEUI.pdf"
+output_pdf_path = "C:\\Users\\mkoer\\Downloads\\annotated-pdf.pdf"
+
+
+def getYear():
+    with open('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\currentYear.txt','r') as file:
+        fileYear = " ".join(line.rstrip() for line in file)
+    file.close()
+    try:
+        if currenYear != int(fileYear):
+            updateYear(currenYear)
+    except:
+        updateYear(currenYear)
+    fileYear = currenYear
+    return fileYear
+
+
+def updateYear(newYear):
+    with open('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\currentYear.txt','w') as file:
+        file.write(str(newYear))
+    file.close()
+    resetNumbers()
+
+
+def resetNumbers():
+    for i in range(1, 5):
+        with open(f'C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\belegnummer_{str(i)}.txt','w') as file:
+            file.write("0")
+        file.close()
+
+# belegnummer_1.txt -> kontoauzugsnummer
+# belegnummer_2.txt -> rechnungsnummer
+# belegnummer_3.txt -> vertragsnummer
+# belegnummer_4.txt -> wertpapierabrechnungsnummer
+
+print(getYear())
 
 packet = BytesIO()
 can = canvas.Canvas(packet)
@@ -18,14 +54,14 @@ data = "RE20240000"
 
 barcode = Code128(data)
 barcode.default_writer_options['write_text'] = False
-barcode.save(""C:\\path\\to\\file.pdf") #Path to svg file
+barcode.save("C:\\Users\\mkoer\\Downloads\\barcode")
 
-svg = svgutils.transform.fromfile("C:\\path\\to\\file.pdf") #Path to svg file
-originalSVG = svgutils.compose.SVG("C:\\path\\to\\file.pdf") #Path to svg file
+svg = svgutils.transform.fromfile("C:\\Users\\mkoer\\Downloads\\barcode.svg")
+originalSVG = svgutils.compose.SVG('C:\\Users\\mkoer\\Downloads\\barcode.svg')
 figure = svgutils.compose.Figure(0, 0, originalSVG)
-figure.save("C:\\path\\to\\file.pdf")
+figure.save('C:\\Users\\mkoer\\Downloads\\barcode.svg')
 
-bar = svg2rlg("C:\\path\\to\\file.pdf") #Path to svg file
+bar = svg2rlg("C:\\Users\\mkoer\\Downloads\\barcode.svg")
 bar.scale(1.4, 0.2)
 
 i=10
