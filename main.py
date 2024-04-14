@@ -16,7 +16,7 @@ output_pdf_path = "C:\\Users\\mkoer\\Downloads\\annotated-pdf.pdf"
 
 
 def getYear():
-    with open('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\currentYear.txt','r') as file:
+    with open('.\\data\\integer\\currentYear.txt','r') as file:
         fileYear = " ".join(line.rstrip() for line in file)
     file.close()
     try:
@@ -29,7 +29,7 @@ def getYear():
 
 
 def updateYear(newYear):
-    with open('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\currentYear.txt','w') as file:
+    with open('.\\data\\integer\\currentYear.txt','w') as file:
         file.write(str(newYear))
     file.close()
     resetNumbers()
@@ -52,16 +52,16 @@ print(getYear())
 def generateBacode(barcodeData):
     barcode = Code128(barcodeData)
     barcode.default_writer_options['write_text'] = False
-    barcode.save("C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode")
+    barcode.save(".\\data\\temp\\barcode")
 
 
 def generateBelegnummer(numerType):
-    with open(f'C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\belegnummer_{str(numerType)}.txt','r') as file:
+    with open(f'.\\data\\integer\\belegnummer_{str(numerType)}.txt','r') as file:
         fileNumber = " ".join(line.rstrip() for line in file)
     file.close()
     fileNumber = int(fileNumber)
     fileNumber += 1
-    with open(f'C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\integer\\belegnummer_{str(numerType)}.txt','w') as file:
+    with open(f'.\\data\\integer\\belegnummer_{str(numerType)}.txt','w') as file:
         file.write(str(fileNumber))
     file.close()
 
@@ -77,12 +77,12 @@ data = "RE20240000"
 
 generateBacode(data)
 
-svg = svgutils.transform.fromfile("C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg")
-originalSVG = svgutils.compose.SVG('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg')
+svg = svgutils.transform.fromfile(".\\data\\temp\\barcode.svg")
+originalSVG = svgutils.compose.SVG('.\\data\\temp\\barcode.svg')
 figure = svgutils.compose.Figure(0, 0, originalSVG)
-figure.save('C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg')
+figure.save('.\\data\\temp\\barcode.svg')
 
-bar = svg2rlg("C:\\Users\\mkoer\\OneDrive\\belegnummerToPdf\\data\\temp\\barcode.svg")
+bar = svg2rlg(".\\data\\temp\\barcode.svg")
 bar.scale(1.4, 0.2)
 
 can.setFillAlpha(0.5)
