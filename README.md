@@ -8,6 +8,11 @@ A tool that writes invoice numbers, or any kind of numbers (10 digits), to a PDF
 ## ⬇️ Installation
 Not ready
 
+You need to install these libaries:
+```
+pip install PyPDF2 reportlab python-barcode svglib svgutils
+```
+
 ## ⚠️ WIP
 This Project is currently work in progress and doesn't work. It will be updated every now and then. <br>
 You can find more information [here](https://github.com/users/Matewoo/projects/7).
