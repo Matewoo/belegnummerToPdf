@@ -15,6 +15,7 @@ input_pdf_path = "C:\\Users\\mkoer\\Downloads\\RE-DE443MGOAEUI.pdf"
 output_pdf_path = "C:\\Users\\mkoer\\Downloads\\annotated-pdf.pdf"
 
 
+
 def getYear():
     with open('.\\data\\integer\\currentYear.txt','r') as file:
         fileYear = " ".join(line.rstrip() for line in file)
