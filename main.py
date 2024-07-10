@@ -10,6 +10,7 @@ import svgutils
 import datetime
 
 
+
 currenYear = datetime.datetime.now().year
 input_pdf_path = "C:\\Users\\mkoer\\Downloads\\RE-DE443MGOAEUI.pdf"
 output_pdf_path = "C:\\Users\\mkoer\\Downloads\\annotated-pdf.pdf"
